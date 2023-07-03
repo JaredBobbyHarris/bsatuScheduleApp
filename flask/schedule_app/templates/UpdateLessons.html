@@ -1,0 +1,149 @@
+﻿{% extends "layout.html" %}
+{% block content %}
+<div class="ManuForShowTable clearfix">
+    <ul>
+        <li><a href="{{url_for('InsertLessons')}}">    Занятия  </a></li>
+        <li><a href="{{url_for('InsertSubjects')}}">   Предметы  </a></li>
+        <li><a href="{{url_for('InsertStudens')}}">    Студенты  </a></li>
+        <li><a href="{{url_for('InsertTeachers')}}">   Преподаватели </a></li>
+        <li><a href="{{url_for('InsertGroups')}}">     Группы     </a></li>
+        <li><a href="{{ url_for('InsertClassrooms')}}"> Аудитории </a></li>
+        <li><a href="{{ url_for('InsertDepartment')}}"> Факультеты</a></li>
+    </ul>
+</div>
+
+<div class="ManuForShowTable clearfix top">
+    <h1 id="title"> Выберите действие </h1>
+    <div class="center">
+        <ul>
+            <li><a href="{{url_for('InsertLessons')}}">    Добавить  </a></li>
+            <li><a href="{{url_for('UpdateLessons')}}">    Сменить </a></li>
+            <li><a href="{{url_for('DeleteLessons')}}">    Удалить </a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="manage-form top">
+    <form name="input_data" action="/UpdateLessons" method="POST">
+        {{ form.hidden_tag() }}
+        <h1 id="title"> Сменить параметры занятия </h1>
+        <p>
+            <ul>
+                <li>
+                    <h1> {{form.idL.label}} </h1>
+                    {{form.idL}}
+                    <datalist id="il">
+                        {% for i in vLessons %}
+                        <option value="{{i[0]}}">
+                            {{i[1]}} | {{i[2]}} | {{i[3]}} |
+                            {{i[4]}} | {{i[5]}} | {{i[6]}} | {{i[7]}} | {{i[8]}} | {{i[9]}}
+                        </option>
+                        {% endfor%}
+                    </datalist>
+                </li>
+            </ul>
+        </p>
+        <p>
+            <ul>
+                <li><h1>Заполните параметры для смены</h1></li>
+            </ul>
+        </p>
+
+        <p>
+            <ul>
+                <li>
+                    <h1> {{form.teacher.label}} </h1>
+                    {{form.teacher}}
+                    <datalist id="t">
+                        {% for a in vTeacher %}
+                        <option value="{{a[0]}}"> {{a[1] + " " +  a[2] + " "  + a[3]}} </option>
+                        {% endfor%}
+                    </datalist>
+                </li>
+                <li>
+                    <h1>{{ form.groups.label}}  </h1>
+                    {{ form.groups }}
+                    <datalist id="g">
+                        {% for g in vGroups %}
+                        <option value="{{g[0]}}"> {{g[1]}} </option>
+                        {% endfor%}
+                    </datalist>
+                </li>
+            </ul>
+        </p>
+        <p>
+            <ul>
+                <li>
+                    <h1>{{ form.subject.label}} </h1>
+                    {{ form.subject }}
+                    <datalist id="s">
+                        {% for s in vSubjects %}
+                        <option value="{{s[0]}}"> {{s[1]}} </option>
+                        {% endfor%}
+                    </datalist>
+                </li>
+            </ul>
+        </p>
+        <p>
+            <ul>
+                <li>
+                    <h1>{{ form.classroom.label}} </h1>
+                    {{ form.classroom }}
+                    <datalist id="c">
+                        {% for c in vClassrooms %}
+                        <option value="{{c[0]}}-{{c[1]}}">{{c[2]}} - {{c[1]}}</option>
+                        {% endfor%}
+                    </datalist>
+                </li>
+                <li>
+                    <h1>Сменить тип занятия</h1>
+                    <select name="typelesson">
+                        <option disabled>Выберите тип занятия</option>
+                        <option value="" style="display:none;"></option>
+                        <option value="Лекция">Лекция</option>
+                        <option value="Практика">Практика</option>
+                    </select>
+                </li>
+            </ul>
+        </p>
+        <p>
+            <ul>
+                <li>
+                    <h1>Сменитьномер пари</h1>
+                    <select name="para">
+                        <option disabled>Выберите номер</option>
+                        <option value="" style="display:none;"></option>
+                        <option value="1">Первая пара</option>
+                        <option value="2">Вторая пара</option>
+                        <option value="3">Третья пара</option>
+                        <option value="4">Четвёртая пара</option>
+                        <option value="5">Пятая пара</option>
+                    </select>
+                </li>
+                <li>
+                    <h1>Сменить частоту</h1>
+                    <select name="f">
+                        <option disabled>Выберите частоту</option>
+                        <option value="" style="display:none;"></option>
+                        <option value="1">Раз в неделю</option>
+                        <option value="2">Раз в две недели</option>
+                        <option value="3">Раз в три недели</option>
+                    </select>
+                </li>
+            </ul>
+        </p>
+        <p>
+            <ul>
+                <li><h1>{{ form.dateFrom.label}} </h1>{{form.dateFrom}}</li>
+                <li><h1>{{ form.dateTo.label}}   </h1>{{form.dateTo}}</li>
+            </ul>
+        </p>
+        {% if message%}
+        <div class="message">
+            {{message}}
+        </div>
+        {% endif %}
+        <button class="btn" type="submit" value="1"> Сменить</button>
+    </form>
+</div>
+{% endblock %}

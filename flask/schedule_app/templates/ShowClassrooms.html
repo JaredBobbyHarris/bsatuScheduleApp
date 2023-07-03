@@ -1,0 +1,29 @@
+﻿{% extends "layout.html" %}
+{% block content %}
+<div class="ManuForShowTable clearfix">
+    <ul>
+        <li><a href="{{ url_for('ShowSubjects') }}">   Предметы  </a></li>
+        <li><a href="{{ url_for('ShowStudens') }}">    Студенты  </a></li>
+        <li><a href="{{ url_for('ShowTeachers') }}">   Преподаватели </a></li>
+        <li><a href="{{ url_for('ShowGroups') }}">     Группы     </a></li>
+        <li><a href="{{ url_for('ShowClassrooms') }}"> Аудитории </a></li>
+        <li><a href="{{ url_for('ShowLessons') }}">    Занятия      </a></li>
+        <li><a href="{{ url_for('ShowDepartment') }}"> Факультеты</a></li>
+    </ul>
+</div>
+<div class="ShowTable clearfix">
+    <h1> Просмотр аудиторий </h1>
+    <table class="fontSizeBig">
+        <tr>
+            <th>Номер корпуса</th>
+            <th>Номер аудитории</th>
+        </tr>
+        {% for s in vClassrooms %}
+        <tr>
+            <td>{{ s[2] }}</td>
+            <td>{{ s[1] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

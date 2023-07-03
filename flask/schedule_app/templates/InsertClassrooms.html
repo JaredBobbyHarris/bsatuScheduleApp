@@ -1,0 +1,63 @@
+﻿{% extends "layout.html" %}
+{% block content %}
+<div class="ManuForShowTable clearfix">
+    <ul>
+        <li><a href="{{url_for('InsertLessons')}}">     Занятия  </a></li>
+        <li><a href="{{url_for('InsertSubjects')}}">    Предметы  </a></li>
+        <li><a href="{{url_for('InsertStudens')}}">     Студенты  </a></li>
+        <li><a href="{{url_for('InsertTeachers')}}">    Преподаватели </a></li>
+        <li><a href="{{url_for('InsertGroups')}}">      Группы     </a></li>
+        <li><a href="{{ url_for('InsertClassrooms')}}"> Аудитории </a></li>
+        <li><a href="{{ url_for('InsertDepartment')}}"> Факультеты</a></li>
+    </ul>
+</div>
+
+<div class="ManuForShowTable clearfix top">
+    <h1 id="title"> Выберите действие </h1>
+    <div class="center">
+        <ul>
+            <li><a href="{{url_for('InsertClassrooms')}}">    Добавить  </a></li>
+            <li><a href="{{url_for('UpdateClassrooms')}}">    Сменить </a></li>
+            <li><a href="{{url_for('DeleteClassrooms')}}">    Удалить </a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="manage-form top">
+    <form name="input_data" action="/InsertClassrooms" method="POST">
+        {{ form.hidden_tag() }}
+        <h1 id="title"> Добавить аудиторию</h1>
+        <p>
+            <ul>
+                <li>
+                    <h1> {{form.corpus.label}} </h1>
+                    {{form.corpus}}
+                    <datalist id="ik">
+                        {% for a in vCorpus %}
+                        <option value="{{a[0]}}"> {{a[1]}} </option>
+                        {% endfor%}
+                    </datalist>
+                </li>
+                <li>
+                    <h1>{{ form.ncalss.label}}  </h1>
+                    {{ form.ncalss }}
+                </li>
+            </ul>
+        </p>
+        <p>
+            <ul>
+                <li>
+                    <h1>{{ form.icorpus.label}} </h1>
+                    {{ form.icorpus }}
+                </li>
+            </ul>
+        </p>
+        {% if message%}
+        <div class="message">
+            {{message}}
+        </div>
+        {% endif %}
+        <button class="btn" type="submit"> Добавить </button>
+    </form>
+</div>
+{% endblock %}
